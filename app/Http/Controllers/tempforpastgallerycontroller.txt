@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\CategoryModal;
+
+class CategoryController extends Controller
+{
+    public function index(Request $request)
+    {
+        return response()->json(
+            [
+                "success" => true,
+                "message" => "This is a message from the category controller",
+            ],
+            200
+        );
+    }
+
+    public function store(Request $request)
+    {
+        $require = null;
+
+        return response()->json([
+            "success" => true,
+            "message" => "Category stored successfully",
+            "data" => $require,
+            "requested_data" => $request,
+        ]);
+    }
+
+    public function show(Request $request)
+    {
+        try {
+            $results = CategoryModal::all();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Category fetched successfully",
+                    "results" => $results,
+                ],
+                200
+            );
+        }
+    }
+}
